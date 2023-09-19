@@ -24,17 +24,17 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 public class HomeViewModel extends AndroidViewModel {
-
     private Context context;
     LatLng UbicacionActual =new LatLng(0,0);
     private FusedLocationProviderClient FusedLPC;
 
-  //  private MutableLiveData<Location> LocationM;
+
 
     private MutableLiveData<MapaActual> MAMutable;
 
@@ -44,12 +44,6 @@ public class HomeViewModel extends AndroidViewModel {
         FusedLPC = LocationServices.getFusedLocationProviderClient(context);
     }
 
- /*   public LiveData<Location> getLocationM() {
-        if (LocationM == null) {
-            LocationM = new MutableLiveData<>();
-        }
-        return LocationM;
-    }*/
     public LiveData<MapaActual> getMapa(){
         if(MAMutable == null){
             MAMutable = new MutableLiveData<>();
@@ -57,6 +51,8 @@ public class HomeViewModel extends AndroidViewModel {
         return MAMutable;
     }
     public void ObtenerMapa(){
+
+
 
         MapaActual MA = new MapaActual();
         MAMutable.setValue(MA);
@@ -70,7 +66,10 @@ public class HomeViewModel extends AndroidViewModel {
 
         @Override
         public void onMapReady(@NonNull GoogleMap googleMap) {
+
+            googleMap.clear();
             googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
             googleMap.addMarker(new MarkerOptions().position(UbicacionActual).title("ACA ESTOY!!"));
 
 
@@ -107,9 +106,8 @@ public class HomeViewModel extends AndroidViewModel {
 
                     UbicacionActual = new LatLng(locationActual.getLatitude(),locationActual.getLongitude());
 
-                    ObtenerMapa();
 
-               //     LocationM.postValue(locationActual);
+                    ObtenerMapa();
                 }
 
             }

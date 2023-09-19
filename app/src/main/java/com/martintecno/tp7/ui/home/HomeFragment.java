@@ -38,22 +38,13 @@ public class HomeFragment extends Fragment {
             public void onChanged(HomeViewModel.MapaActual mapaActual) {
                 SupportMapFragment SMF =  (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
-
                 SMF.getMapAsync(mapaActual);
 
              //
 
             }
         });
-        homeViewModel.LecturaPermanente();
-        homeViewModel.ObtenerMapa();
-     //   ;
-
-        //    vmMain.ObtenerUltimaUbicacion();
-
-      //  homeViewModel.LecturaPermanente();
-
-
+         homeViewModel.LecturaPermanente();
 
         return root;
     }

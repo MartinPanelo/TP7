@@ -34,6 +34,8 @@ public class HomeViewModel extends AndroidViewModel {
     LatLng UbicacionActual =new LatLng(0,0);
     private FusedLocationProviderClient FusedLPC;
 
+    private boolean flag = true;
+
 
 
     private MutableLiveData<MapaActual> MAMutable;
@@ -68,7 +70,13 @@ public class HomeViewModel extends AndroidViewModel {
         public void onMapReady(@NonNull GoogleMap googleMap) {
 
             googleMap.clear();
-            googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
+            if(flag){
+                googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                flag = false;
+            }
+
+
 
             googleMap.addMarker(new MarkerOptions().position(UbicacionActual).title("ACA ESTOY!!"));
 
